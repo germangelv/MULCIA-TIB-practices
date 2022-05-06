@@ -175,7 +175,7 @@ library(rstatix)
 library(ggpubr)
 media <- convertframe %>% get_summary_stats(results, type = "median_iqr")
 media
-stat <- convertframe %>% select(results) %>% rstatix::wilcox_test(results, mu = 0.3815)
+stat <- convertframe %>% select(results) %>% rstatix::wilcox_test(results)
 stat
 # .y.     group1 group2         n statistic     p
 #  * <chr>   <chr>  <chr>      <int>     <dbl> <dbl>
@@ -200,14 +200,14 @@ for (i1 in 1:length(rend)){
 }
 r1 = r1/length(rend)
 
-stat2 <- wilcox.test(x = rend, y = rfirst, alternative = "two.sided", mu = r1, paired = TRUE)
+stat2 <- wilcox.test(x = rend, y = rfirst, alternative = "two.sided", paired = TRUE)
 stat2
 # data:  rend and rfirst
-# V = 175633, p-value = 0.000348
-# alternative hypothesis: true location shift is not equal to 0.00045
+# V = 175633, p-value = 0.9505
+# alternative hypothesis: true location shift is not equal to 0
 ## Se calculó una prueba Wilcoxon con signo para evaluar cada cadena con la subsecuentes y 
-## dado que p es menor a 0.05, 0.01 y 0.001 podemos decir que tenemos evidencias estadisticas
-## significativas para descartar la hipotesis y aceptar que los datos son diferentes a la media de variacion
+## dado que p es superior a 0.05  podemos decir que tenemos evidencias estadisticas
+## significativas para descartar la hipotesis y aceptar que los datos son similares  a la media de variacion
 ## de la cadena
 # require(coin)
 # wilcoxsign_test(antes ~ despues, data = datos, distribution = "exact", mu = 0.3815)
@@ -268,7 +268,7 @@ lapply(analisis[1][sapply(analisis[1], is.numeric)], shapiro.test)
 media <- convertframe %>% get_summary_stats(results, type = "median_iqr")
 media #??? 0.311
 
-stat <- convertframe %>% select(results) %>% rstatix::wilcox_test(results, mu = 0.3815)
+stat <- convertframe %>% select(results) %>% rstatix::wilcox_test(results)
 stat
 
 # Preparo datos para funcion
@@ -286,14 +286,14 @@ for (i1 in 1:length(rend)){
 r1 = r1/length(rend)
 r1 # 0.0041
 
-stat2 <- wilcox.test(x = rend, y = rfirst, alternative = "two.sided", mu = r1, paired = TRUE)
+stat2 <- wilcox.test(x = rend, y = rfirst, alternative = "two.sided", paired = TRUE)
 stat2
 # data:  rend and rfirst
-# V = 20774, p-value < 2.2e-16
-# alternative hypothesis: true location shift is not equal to 0.0041
+# V = 168425, p-value = 0.7475
+# alternative hypothesis: true location shift is not equal to 0
 ## Se calculó una prueba Wilcoxon con signo para evaluar cada cadena con la subsecuentes y 
-## dado que p es menor a 0.05, 0.01 y 0.001 podemos decir que tenemos evidencias estadisticas
-## significativas para descartar la hipotesis y aceptar que los datos son diferentes a la media de variacion
+## dado que p es mayor a 0.05 podemos decir que tenemos evidencias estadisticas
+## significativas para descartar la hipotesis y aceptar que los datos son similares a la media de variacion
 
 # Grafico
 bxp <- ggboxplot(
