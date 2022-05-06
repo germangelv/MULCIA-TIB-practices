@@ -48,23 +48,16 @@
 ## el fichero HMM.RData).
 ######################################################################
 
-hi <- read.fasta("D:\\Proyecto\\MULCIA-TIB-practices\\entrega_2\\NC_001416.1.fasta", seqtype="AA")
-load("HMM.RData")
+
+
 ######################################################################
 ## (2) Crear un gráfico para comparar el contenido global y local en
 ## GC del genoma del bacterio fago lambda usando una ventana de
 ## longitud 5000 y un desplazamiento de 500.
 ######################################################################
-library("seqinr")
-longitud <- 5000
-desplazamiento <- 500
-genomaHi <- getSequence(hi)[[1]]
-analisis <- local.composition(seq = genomaHi, func = GC, window.length = longitud, offset = desplazamiento)
-convertframe <- data.frame(X=c(analisis[2])  , Y=c(analisis[1]), stringsAsFactors = FALSE)
-plot(convertframe, 
-     type = "l",
-     pch=".",
-     col="blue")
+
+
+
 ######################################################################
 ## (3) Escribir una función para el entrenamiento de un HMM (es decir,
 ## que estime las probabilidades iniciales, matriz de transición y
