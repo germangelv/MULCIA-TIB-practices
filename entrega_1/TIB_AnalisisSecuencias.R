@@ -1,62 +1,7 @@
-## Carga de bibliotecas adicionales
-## library("biblioteca") o a trav√©s del men√∫ Packages
-
-## Variables y asignaci√≥n 
-## variable <- valor
-
-## Funciones
-## funci√≥n(datos, ..., arg1 = valor1, ...)
-
-## Vectores: Todos los elementos de la misma naturaleza
-## * Creaci√≥n:
-##   - c(dato1, dato2, ...)
-##   - inicio:fin siendo inicio y fin dos n√∫meros cualesquiera
-## * Selecci√≥n:
-##   - Por los √≠ndices de las posiciones: vector[vector.√≠ndices]
-##   - Por exclusi√≥n de las posiciones: vector[-vector.√≠ndices]
-
-## Matrices
-## Acceso:
-## - Por el √≠ndice de la columna: matriz[, √≠ndice.col]
-
-## Listas: Cada elemento puede tener una naturaleza diferente.
-## Acceso:
-## - Por el √≠ndice del elemento: lista[[√≠ndice]]
-## - Por el nombre del elemento (no siempre disponible): lista$nombre
-
-## Gr√°ficos: n.color, n.l√≠nea y n.punto son un entero indicando el
-## color, el tipo de l√≠nea y el tipo de punto, respectivamente (por
-## defecto 1 en ambos casos, negro, continua respectivamente).
-## * En general: main, xlab, ylab (t√≠tulo y etiquetas de los ejes x e
-##   y).
-## * De l√≠neas:
-##   plot(coord.x, coord.y, type = "l", col = n.color, lty = n.l√≠nea)
-## * Histograma (de densidad):
-##   hist(datos, freq = FALSE)
-## * Diagrama de caja y bigote
-##   boxplot(datos1, datos2, ..., col = vector.colores,
-##           names = vector.nombres)
-
-## A√±adidos a un gr√°fico:
-## * L√≠neas verticales a distancias vector.x del origen
-##   abline(v = vector.x, col = vector.color, lty = vector.l√≠nea)
-## * L√≠neas horizontales a distancias vector.y del origen
-##   abline(h = vector.y, col = vector.color, lty = vector.l√≠nea)
-## * L√≠neas
-##   lines(x.coord, y.coord, col = n.color, lty = n.l√≠nea)
-## * Puntos
-##   points(x.coord, y.coord, col = n.color, pch = n.punto)
-## * Leyenda para un gr√°fico de l√≠neas
-##   legend(x.pos, y.pos, vector.nombres, col = vector.colores, 
-##          lty = vector.l√≠neas)
-
-## plot(1:25, pch = 1:25, col = rep(1:8, length.out = 25))
-## abline(h = 1:6, col = 1:6, lty = 1:6)
-
 ######################################################################
 ## Haemophilus influenzae (NC_000907) es una bacteria gram-negativa
-## que fue err√≥neamente considerada la causa de la gripe hasta que en
-## 1933 se descubri√≥ la causa viral de la misma.
+## que fue errÛneamente considerada la causa de la gripe hasta que en
+## 1933 se descubriÛ la causa viral de la misma.
 
 ## El genoma de H. influenzae fue el primer genoma en secuenciarse de
 ## un organismo de vida libre por el grupo de Craig Venter en 1995.
@@ -64,31 +9,31 @@
 
 ######################################################################
 ## (1) Descargar su genoma de la base de datos de NCBI (como un
-## fichero fasta) y, utilizando la funci√≥n read.fasta de la biblioteca
-## seqinr, guardar dicha informaci√≥n como hi.
+## fichero fasta) y, utilizando la funciÛn read.fasta de la biblioteca
+## seqinr, guardar dicha informaciÛn como hi.
 library("seqinr")
 hi <- read.fasta("D:\\Proyecto\\MULCIA-TIB-practices\\entrega_1\\NC_000907.fasta", seqtype="AA")
 ######################################################################
 
 ######################################################################
-## (2) Utilizar la funci√≥n getSequence para obtener, del primer
-## elemento (y √∫nico) de hi (un objeto de la clase SeqFastadna
-## anterior), la secuencia de ADN. Guardar dicha informaci√≥n como
+## (2) Utilizar la funciÛn getSequence para obtener, del primer
+## elemento (y ˙nico) de hi (un objeto de la clase SeqFastadna
+## anterior), la secuencia de ADN. Guardar dicha informaciÛn como
 ## genomaHi
 genomaHi <- getSequence(hi)[[1]]
 ######################################################################
 
 ######################################################################
-## La siguiente funci√≥n calcula (para una secuencia, seq) el valor
-## local de una funci√≥n, func, utilizando una ventada de longitud
+## La siguiente funciÛn calcula (para una secuencia, seq) el valor
+## local de una funciÛn, func, utilizando una ventada de longitud
 ## window.length y un desplazamiento offset.
 
 local.composition <- function (seq, func, window.length, offset) {
   
-  ## Paso 1: Inicializaci√≥n de variables antes del bucle:
-  ## low.extrems ‚Üê serie aritm√©tica de raz√≥n offset con inicio en 1
-  ## y con (tama√±o de seq) - window.length + 1 como tope superior
-  ## results ‚Üê matriz vac√≠a (num√©rico)
+  ## Paso 1: InicializaciÛn de variables antes del bucle:
+  ## low.extrems ‚Üê serie aritmÈtica de razÛn offset con inicio en 1
+  ## y con (tamaÒo de seq) - window.length + 1 como tope superior
+  ## results ‚Üê matriz vacÌa (numÈrico)
   low.extrems <- seq(1, length(seq) - window.length + 1, 
                      by = offset)
   results <- numeric()
@@ -96,7 +41,7 @@ local.composition <- function (seq, func, window.length, offset) {
   ## Paso 2: Para cada uno de los elementos de low.extrems hace:
   for (i in low.extrems) {
     
-    ## Paso 2.1: A√±adir a results una nueva fila con los valores
+    ## Paso 2.1: AÒadir a results una nueva fila con los valores
     ## de func sobre el trozo de seq entre i e (i + window.length
     ## - 1)
     results <- rbind(results, func(seq[i:(i+window.length-1)]))
@@ -112,14 +57,19 @@ local.composition <- function (seq, func, window.length, offset) {
 ######################################################################
 ## (3) Calcular en contenido en GC, global y local utilizando una
 ## ventana de longitud 20000 y un desplazamiento de 2000. Representar, 
-## utilizando un gr√°fico de l√≠neas, los resultados obtenidos.
-## Nota: Utilizar la funci√≥n GC de la biblioteca seqinr.
-GC(c(genomaHi))
+## utilizando un gr·fico de lÌneas, los resultados obtenidos.
+## Nota: Utilizar la funciÛn GC de la biblioteca seqinr.
+# Calculo la media para despues
+media <- GC(c(genomaHi))
+media # 0.3815029
+# Preparo para local.composition
 longitud <- 20000
 desplazamiento <- 2000
-local.composition(seq = genomaHi, func = GC, window.length = longitud, offset = desplazamiento)
-analisis <- local.composition(seq = genomaHi, func = GC, window.length = 20000, offset = 2000)
+# Calculo contenido local y global
+analisis <- local.composition(seq = genomaHi, func = GC, window.length = longitud, offset = desplazamiento)
+# Verifco o convierto a numerico
 lapply(analisis[1][sapply(analisis[1], is.numeric)], max)
+# Lo paso a dataframe para poder manipular
 convertframe <- data.frame(X=c(analisis[2])  , Y=c(analisis[1]), stringsAsFactors = FALSE)
 plot(convertframe, 
      type = "l",
@@ -128,38 +78,38 @@ plot(convertframe,
 ######################################################################
 
 ######################################################################
-## El contenido en GC de un genoma, la proporci√≥n de los nucle√≥tidos g
-## y c, es una caracter√≠stica muy espec√≠fica de cada organismo en
+## El contenido en GC de un genoma, la proporciÛn de los nucleÛtidos g
+## y c, es una caracterÌstica muy especÌfica de cada organismo en
 ## concreto.
 
 ## La transferencia horizontal de genes hace referencia a la
-## transmisi√≥n de genes entre organismos vivos (com√∫nmente de
+## transmisiÛn de genes entre organismos vivos (com˙nmente de
 ## diferentes especies) sin que uno sea el progenitor del otro.
 
-## Debido a que el contenido en GC es una de las caracter√≠sticas m√°s
-## espec√≠ficas de cada especie, la identificaci√≥n de zonas en el
+## Debido a que el contenido en GC es una de las caracterÌsticas m·s
+## especÌficas de cada especie, la identificaciÛn de zonas en el
 ## genoma cuyo contenido en GC diverge significativamente del
 ## contenido GC global puede indicar la existencia de un evento de
 ## transferencia horizontal de genes.
 
-## ¬øSe observa en el gr√°fico anterior una desviaci√≥n significativa?
+## øSe observa en el gr·fico anterior una desviaciÛn significativa?
 ## Si, se observa una desviacion significativa cuando es analizada la cadena superando el gen
-## 1500000 por encima del 47.075% dada que al emdia es de 38.15029%
+## 1500000 por encima del 47.075% dada que la emedia es de 38.15029%
 
-## ¬øPuede esto indicar transferencia horizontal de genes?
-## Si, la zona donde diverge a un 46% es un indicador de tranbsferencia horizontal de genes
+## øPuede esto indicar transferencia horizontal de genes?
+## Si, la zona donde diverge a un 46% es un indicador de transferencia horizontal de genes
 ######################################################################
 
 ######################################################################
 ## (4) Identificar los puntos en los que se observa la mayor
-## desviaci√≥n
-## Se puede ver un punto de maxima desviacion entre las posiciones 1568001 a 1572001 en aproximadamente 0.4707500
+## desviaciÛn
+## Se puede ver un punto de maxima desviacion entre las posiciones 1568001 a 1572001 en aproximadamente 0.47075%
 ######################################################################
 
 ######################################################################
 ## (5) Comprobar, visualizando los datos y con un test de
 ## Shapiro-Wilk, si el contenido en GC local en los distintos tramos
-## sigue una distribuci√≥n normal.
+## sigue una distribuciÛn normal.
 lapply(analisis[1][sapply(analisis[1], is.numeric)], shapiro.test)
 ## Dado que 2.2e-16 es inferior a 0.05 los datos de la muestra no provienen de una distribuciÛn normal
 ######################################################################
@@ -167,50 +117,16 @@ lapply(analisis[1][sapply(analisis[1], is.numeric)], shapiro.test)
 ######################################################################
 ## (6) Determinar, utilizando un test adecuado, si la diferencia entre
 ## los tramos es significativa.
-# install.packages("tidyverse")
-# install.packages("rstatix")
-# install.packages("ggpubr")
-library(tidyverse)
-library(rstatix)
-library(ggpubr)
-media <- convertframe %>% get_summary_stats(results, type = "median_iqr")
-media
-stat <- convertframe %>% select(results) %>% rstatix::wilcox_test(results)
-stat
-# .y.     group1 group2         n statistic     p
-#  * <chr>   <chr>  <chr>      <int>     <dbl> <dbl>
-#  1 results 1      null model   906   184574. 0.011
-
-## Se calculÛ una prueba Wilcoxon con signo para evaluar si la media GC local era diferente a la media GC y
-## dado que p es menor a 0.05 pero no menor a 0.01 o 0.001 podemos decir que tenemos evidencias estadisticas
-## significativas para aceptar la hipotesis y considerar que existen datos similares a la media
-
-library(coin) # wilcox.test wilcoxsign_test
-# Preparo datos para funcion
-rfirst <- convertframe %>% select(results)
-rfirst = rfirst[-1,]
-rend<- convertframe %>% select(results)
-rend = rend[-nrow(rend),]
-datos <- data.frame(antes = rend, despues = rfirst)
-
-# calculo la media de variacion entre segmentos
-r1 <- 0
-for (i1 in 1:length(rend)){
-  r1 = r1+ c(abs(rfirst[1]-rend[1]))
-}
-r1 = r1/length(rend)
-
-stat2 <- wilcox.test(x = rend, y = rfirst, alternative = "two.sided", paired = TRUE)
+# Utilice 1.2 porque de esa manera podia facilmente separar y unir la secuencia
+fragmento <-convertframe [ convertframe$results > media*1.2, ]
+resto <- convertframe [ convertframe$results <= media*1.2, ]
+library(stats)
+stat2 <- wilcox.test(fragmento$results, resto$results)
 stat2
-# data:  rend and rfirst
-# V = 175633, p-value = 0.9505
-# alternative hypothesis: true location shift is not equal to 0
-## Se calculÛ una prueba Wilcoxon con signo para evaluar cada cadena con la subsecuentes y 
-## dado que p es superior a 0.05  podemos decir que tenemos evidencias estadisticas
-## significativas para descartar la hipotesis y aceptar que los datos son similares  a la media de variacion
-## de la cadena
-# require(coin)
-# wilcoxsign_test(antes ~ despues, data = datos, distribution = "exact", mu = 0.3815)
+## Se calculo una prueba Wilcoxon entre el fragmento de interes y el resto de 
+## la secuencia y hay mucha evidencia en contra de la hipotesis nula de que ambos
+## fragmentos puedan ser similares por lo que tenemos evidencia estadistica para
+## considerar una divergencia y por lo tanto una posible transferencia horizontal de genes
 ######################################################################
 
 ######################################################################
@@ -220,41 +136,49 @@ stat2
 ## - Un asterisco p-valor < 0.05
 ## - Dos asteriscos p-valor < 0.01
 ## - Tres asteriscos p-valor < 0.001
-bxp <- ggboxplot(
-  convertframe$results, width = 0.5, add = c("mean", "jitter"), 
-  ylab = "Resultados GC", xlab = FALSE
-)
-bxp
+boxplot(fragmento$results, convertframe$results,
+        main = "ComparaciÛn entre fragmento divergente y secuencia",
+        at = c(1,3),
+        names = c("Fragmento","Secuencia"),
+        col = c("orange", "yellow"),
+        pch=8,
+        sub = "W = 3608, p-value = 0.0005532",
+        vertical = TRUE)
 ######################################################################
 
 ######################################################################
 ## Tarea:
-## Realizar un an√°lisis parecido para el genoma de la bacteria
+## Realizar un an·lisis parecido para el genoma de la bacteria
 ## Methanocaldococcus jannaschii (NC_000909). Se trata de una archaea
-## metan√≥gena termof√≠lica que habita ventanas hidrotermales creciendo
-## usando como fuente de energ√≠a di√≥xido de carbono e hidr√≥geno y
+## metanÛgena termofÌlica que habita ventanas hidrotermales creciendo
+## usando como fuente de energÌa diÛxido de carbono e hidrÛgeno y
 ## produciendo metano como producto secundario de su metabolismo.
 
 ## El grupo de Craig Venter fue el primero en secuenciar su genoma en
-## 1996 que constituy√≥ el primer genoma de archaea en secuenciarse
-## completamente. La secuenciaci√≥n de su genoma produjo evidencias
+## 1996 que constituyÛ el primer genoma de archaea en secuenciarse
+## completamente. La secuenciaciÛn de su genoma produjo evidencias
 ## claves para la existencia de los tres dominios de la vida (Archaea,
 ## Bacteria y Eukarya).
 
 ## Ref: "Compositional Biases of Bacterial Genomes and Evolutionary
-## Implications", S. Karlin, J. Mr√°zek, A.M. Campbell, Journal of
+## Implications", S. Karlin, J. Mr·zek, A.M. Campbell, Journal of
 ## Bacteriology, June 1997, p. 3899‚Äì3913
-
-
 ######################################################################
 
 ## Analisis NC_000909
 hi <- read.fasta("D:\\Proyecto\\MULCIA-TIB-practices\\entrega_1\\NC_000909.fasta", seqtype="AA")
 genomaHi <- getSequence(hi)[[1]]
-GC(c(genomaHi)) # 0.3142
+# Obtengo media
+media <- GC(c(genomaHi))
+media # 0.3142
+# Preparo para local.composition
 longitud <- 20000
+desplazamiento <- 2000
+# Calculo contenido local y global
 analisis <- local.composition(seq = genomaHi, func = GC, window.length = longitud, offset = desplazamiento)
+# Verifco o convierto a numerico
 lapply(analisis[1][sapply(analisis[1], is.numeric)], max) # 0.4093
+# Lo paso a dataframe para poder manipular
 convertframe <- data.frame(X=c(analisis[2])  , Y=c(analisis[1]), stringsAsFactors = FALSE)
 plot(convertframe, 
      type = "l",
@@ -262,43 +186,36 @@ plot(convertframe,
      col="blue")
 ## Se pueden ver dos maximos en la secuencia en la posicion 144001 a 148001 en aproximadamente 0.4093000 y
 ## en la posicion 632001 a 636001 en aproximadamente 0.4073500
-lapply(analisis[1][sapply(analisis[1], is.numeric)], shapiro.test)
+
+# Analizo distribuciÛn
+lapply(analisis[1][sapply(analisis[1], is.numeric)], shapiro.test) # W = 0.74377, p-value < 2.2e-16
 ## Dado que 2.2e-16 es inferior a 0.05 los datos de la muestra no provienen de una distribuciÛn normal
 
-media <- convertframe %>% get_summary_stats(results, type = "median_iqr")
-media #??? 0.311
+#Separo divergencias
+fragmento1 <-convertframe [ convertframe$positions < 500000, ]
+fragmento1_analyzed <-fragmento1 [ fragmento1$results > media*1.2, ]
+fragmento1_analyzed
+fragmento2 <-convertframe [ convertframe$positions > 500000, ]
+fragmento2_analyzed <-fragmento2 [ fragmento2$results > media*1.2, ]
+fragmento2_analyzed
+resto <- convertframe [ convertframe$results <= media*1.2, ]
 
-stat <- convertframe %>% select(results) %>% rstatix::wilcox_test(results)
-stat
+library(stats)
+stat1 <- wilcox.test(fragmento1_analyzed$results, resto$results)
+stat1 # W = 6456, p-value = 1.11e-06
+stat2 <- wilcox.test(fragmento2_analyzed$results, resto$results)
+stat2 # W = 6456, p-value = 1.11e-06
+## Se calculo una prueba Wilcoxon entre el fragmento de interes y el resto de 
+## la secuencia y hay mucha evidencia en contra de la hipotesis nula de que ambos
+## fragmentos puedan ser similares por lo que tenemos evidencia estadistica para
+## considerar una divergencia y por lo tanto una posible transferencia horizontal de genes
+## en ambos fragmentos
 
-# Preparo datos para funcion
-rfirst <- convertframe %>% select(results)
-rfirst = rfirst[-1,]
-rend<- convertframe %>% select(results)
-rend = rend[-nrow(rend),]
-datos <- data.frame(antes = rend, despues = rfirst)
-
-# Calculo la media de variacion entre segmentos
-r1 <- 0
-for (i1 in 1:length(rend)){
-  r1 = r1+ c(abs(rfirst[1]-rend[1]))
-}
-r1 = r1/length(rend)
-r1 # 0.0041
-
-stat2 <- wilcox.test(x = rend, y = rfirst, alternative = "two.sided", paired = TRUE)
-stat2
-# data:  rend and rfirst
-# V = 168425, p-value = 0.7475
-# alternative hypothesis: true location shift is not equal to 0
-## Se calculÛ una prueba Wilcoxon con signo para evaluar cada cadena con la subsecuentes y 
-## dado que p es mayor a 0.05 podemos decir que tenemos evidencias estadisticas
-## significativas para descartar la hipotesis y aceptar que los datos son similares a la media de variacion
-
-# Grafico
-bxp <- ggboxplot(
-  convertframe$results, width = 0.5, add = c("mean", "jitter"), 
-  ylab = "Resultados GC", xlab = FALSE
-)
-bxp
-
+boxplot(fragmento1_analyzed$results, fragmento2_analyzed$results, convertframe$results,
+        main = "ComparaciÛn entre fragmentos divergentes y secuencia",
+        at = c(1,2,4),
+        names = c("Fragmento 1","Fragmento 2","Secuencia"),
+        col = c("orange", "purple", "yellow"),
+        pch=8,
+        sub = "W = 6456, p-value = 1.11e-06",
+        vertical = TRUE)
